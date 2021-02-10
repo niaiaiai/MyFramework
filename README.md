@@ -12,6 +12,8 @@ demo: https://studydemo.online:8081/
     dotnet new Myfw -n [项目名称]
 
 ## 项目结构
+ddd 架构
+
 * Application 应用层
 * Domain 领域层
 * Infrastructure 基础设施层
