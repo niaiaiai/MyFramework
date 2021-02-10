@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+	<PackageId>MyEntityFrameworkCore</PackageId>
+	<PackageVersion>1.0.0</PackageVersion>
+	<IsPackable>true</IsPackable>
+	<OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyEntity\MyEntity.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>MyServices</AssemblyName>
+    <RootNamespace>MyServices</RootNamespace>
+	<PackageId>MyServices</PackageId>
+	<PackageVersion>1.0.1-beta</PackageVersion>
+	<IsPackable>true</IsPackable>
+	<OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="MyRepositories" Version="1.1.0-beta" />
+  </ItemGroup>
+
+</Project>
