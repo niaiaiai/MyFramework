@@ -32,11 +32,15 @@ demo: https://studydemo.online:8081/
 实现 IDataSeed 接口后，会自动迁移并初始化数据。
 
 Package Manager 命令:
-    PM> Add-Migration Init -Context XXXContext -Project Infrastructure -StartupProject Infrastructure -Args '--environment Development'
-    PM> Update-Database -Context XXXContext -Project Infrastructure -StartupProject Infrastructure -Args '--environment Development'
+```
+PM> Add-Migration Init -Context XXXContext -Project Infrastructure -StartupProject Infrastructure -Args '--environment Development'
+PM> Update-Database -Context XXXContext -Project Infrastructure -StartupProject Infrastructure -Args '--environment Development'
+```
 
 环境参数的依据是项目中配置文件，如:
-    -Args '--environment Development' 或 -Args '--environment Production'
+```
+-Args '--environment Development' 或 -Args '--environment Production'
+```
 
 ## 包含的项目
 个人 baget 仓库地址: http://studydemo.online:13564/
