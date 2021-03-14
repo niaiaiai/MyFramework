@@ -2,3 +2,5 @@
 src/*/bin/
 src/*/obj/
 src/*/logs
+test/*/bin/
+test/*/obj/

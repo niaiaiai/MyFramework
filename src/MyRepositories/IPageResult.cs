@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MyRepositories
 {
+    [Obsolete("请使用MyServices中的IPageResult")]
     public interface IPageResult<T> where T : class
     {
         public IEnumerable<T> Data { get; set; }
