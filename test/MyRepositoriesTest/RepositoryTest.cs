@@ -35,7 +35,8 @@ namespace MyRepositoriesTest
             Assert.Null(entity);
         }
 
-        public async Task UpdateAsync_Should_Update()
+
+        public async Task UpdateAsync_Should_UpdateOne()
         {
 
         }
