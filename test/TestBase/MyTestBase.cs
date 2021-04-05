@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestBase
 {
@@ -22,23 +19,27 @@ namespace TestBase
                 .AddJsonFile("appsettings.json", true, true)
                 .Build();
 
+
             var options = new DbContextOptionsBuilder<MyTestContext>()
                 .UseSqlServer(configuration.GetConnectionString("MyTestConnection"))
+                .UseLoggerFactory(LoggerFactory.Create(logging =>
+                {
+                    logging.AddDebug();
+                    logging.SetMinimumLevel(LogLevel.Information);
+                }))
                 .Options;
 
             MyTestContext context = new MyTestContext(options);
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
-            if (!context.MyTestEntities.Any())
+            for (int i = 0; i < 9999; i++)
             {
-                for(int i = 0; i < 9999; i++)
+                context.MyTestEntities.Add(new MyTestEntity
                 {
-                    context.MyTestEntities.Add(new MyTestEntity
-                    {
-                        Message = $"见鬼message{i + 1}"
-                    });
-                }
-                context.SaveChanges();
+                    Message = $"见鬼message{i + 1}"
+                });
             }
+            context.SaveChanges();
             return context;
         }
     }
