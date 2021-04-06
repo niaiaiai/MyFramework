@@ -7,9 +7,27 @@ using System.Reflection;
 
 namespace MyCore.DependencyInjection
 {
-    public class DependencyInjectionBase
+    public class DependencyInjectionManager : IDependencyInjectionManager
     {
-        public DependencyInjectionBase(IServiceCollection services)
+        public DependencyInjectionManager(IServiceCollection services)
+        {
+            LoadAssemblies(services);
+        }
+
+        public IServiceCollection Initialize(IServiceCollection services)
+        {
+            using (IServiceScope scope = services.BuildServiceProvider().GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var configureProviders = scope.ServiceProvider.GetServices<IDefaultConfigureServices>();
+                foreach (var provider in configureProviders)
+                {
+                    provider.ConfigureServices(services);
+                }
+            }
+            return services;
+        }
+
+        public void LoadAssemblies(IServiceCollection services)
         {
             //get assemblies
             string path = AppDomain.CurrentDomain.BaseDirectory;
@@ -32,21 +50,6 @@ namespace MyCore.DependencyInjection
             {
                 services.AddScoped(typeof(IDefaultConfigureServices), type);
             }
-
-            Init(services);
-        }
-
-        protected IServiceCollection Init(IServiceCollection services)
-        {
-            using (IServiceScope scope = services.BuildServiceProvider().GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var configureProviders = scope.ServiceProvider.GetServices<IDefaultConfigureServices>();
-                foreach (var provider in configureProviders)
-                {
-                    provider.ConfigureServices(services);
-                }
-            }
-            return services;
         }
     }
 }

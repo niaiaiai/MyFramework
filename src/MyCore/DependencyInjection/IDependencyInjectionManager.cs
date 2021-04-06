@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace MyCore.DependencyInjection
 {
     public interface IDependencyInjectionManager
     {
+        void LoadAssemblies(IServiceCollection services);
 
+        IServiceCollection Initialize(IServiceCollection services);
     }
 }

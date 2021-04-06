@@ -43,9 +43,34 @@ namespace MyRepositoriesTest
         }
 
 
+        [Fact]
         public async Task UpdateAsync_Should_UpdateOne()
         {
+            MyTestEntity entity = await _repository.GetAsync(1);
+            entity.Message = $"Update更新{entity.Message}";
+            await _repository.UpdateAsync(entity);
 
+            // 事务内查询，没savechange没提交事务
+            MyTestEntity checkEntity = await _repository.GetAsync(1);
+            Assert.Equal(entity.Message, checkEntity.Message);
+        }
+
+        [Fact]
+        public async Task UpdateAsync_Should_UpdateMany()
+        {
+            var entities = (await _repository.GetListAsync(i => i.Id == 2 || i.Id == 3)).ToList();
+            foreach (var entity in entities)
+            {
+                entity.Message = $"Update批量更新{entity.Message}";
+            }
+            await _repository.UpdateAsync(entities);
+
+            var checkEntities = (await _repository.GetListAsync(i => i.Id == 2 || i.Id == 3)).ToList();
+            foreach (var checkEntity in checkEntities)
+            {
+                var entity = entities.FirstOrDefault(e => e.Id == checkEntity.Id);
+                Assert.Equal(entity.Message, checkEntity.Message);
+            }
         }
 
         [Theory]
