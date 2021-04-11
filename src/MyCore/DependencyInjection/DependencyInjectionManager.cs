@@ -12,9 +12,10 @@ namespace MyCore.DependencyInjection
         public DependencyInjectionManager(IServiceCollection services)
         {
             LoadAssemblies(services);
+            Initialize(services);
         }
 
-        public IServiceCollection Initialize(IServiceCollection services)
+        public virtual IServiceCollection Initialize(IServiceCollection services)
         {
             using (IServiceScope scope = services.BuildServiceProvider().GetService<IServiceScopeFactory>().CreateScope())
             {
@@ -27,7 +28,7 @@ namespace MyCore.DependencyInjection
             return services;
         }
 
-        public void LoadAssemblies(IServiceCollection services)
+        public virtual void LoadAssemblies(IServiceCollection services)
         {
             //get assemblies
             string path = AppDomain.CurrentDomain.BaseDirectory;

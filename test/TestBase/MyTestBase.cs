@@ -13,7 +13,7 @@ namespace TestBase
             dbContext = DbConfig();
         }
 
-        private static DbContext DbConfig()
+        public static DbContext DbConfig(bool delete = true)
         {
             IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", true, true)
@@ -30,9 +30,13 @@ namespace TestBase
                 .Options;
 
             MyTestContext context = new MyTestContext(options);
-            context.Database.EnsureDeleted();
+            if (delete)
+            {
+                context.Database.EnsureDeleted();
+            }
             context.Database.EnsureCreated();
-            for (int i = 0; i < 9999; i++)
+
+            for (int i = 0; !context.MyTestEntities.Any() && i < 9999; i++)
             {
                 context.MyTestEntities.Add(new MyTestEntity
                 {
