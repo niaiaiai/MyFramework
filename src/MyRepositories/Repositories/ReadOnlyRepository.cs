@@ -9,7 +9,7 @@ namespace MyRepositories.Repositories
 {
     public abstract class ReadOnlyRepository<Entity> : IReadOnlyRepository<Entity> where Entity : class
     {
-        protected DbSet<Entity> query { get; }
+        public DbSet<Entity> query { get; }
 
         protected ReadOnlyRepository(DbSet<Entity> dbSet)
         {
