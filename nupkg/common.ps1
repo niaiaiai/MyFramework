@@ -11,12 +11,12 @@ $solutions = (
 $projects = (
 
     # framework
-    #"MyFramework/src/MyAspNetCore",
-    #"MyFramework/src/MyAuthorization",
-    #"MyFramework/src/MyCore",
-    "MyFramework/src/MyEntity",
-    "MyFramework/src/MyEntityFrameworkCore",
-    "MyFramework/src/MyRepositories",
-    "MyFramework/src/MyServices",
-    "MyFramework/src/Utils"
+    "src/MyAspNetCore",
+    #"src/MyAuthorization",
+    "src/MyCore"
+    #"src/MyEntity",
+    #"src/MyEntityFrameworkCore",
+    #"src/MyRepositories",
+    #"src/MyServices",
+    #"src/Utils"
 )
